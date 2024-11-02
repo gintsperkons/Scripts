@@ -33,8 +33,8 @@ if exist !tempDir! (
 )
 
 echo Setup complete.
+call Vendor\Binaries\venv\Scripts\deactivate.bat
 popd
-deactivate
 goto :eof
 
 

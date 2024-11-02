@@ -18,7 +18,6 @@ def clean(fileEnding,folderNames):
                 print("Removed: " + os.path.join(root, dir))
 
 if __name__ ==  "__main__":
-    print("This is the main function")
     fileEndings = []
     folderNames = []
     cleanType = None if len(sys.argv) < 2 else sys.argv[1]

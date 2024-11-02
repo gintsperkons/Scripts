@@ -23,7 +23,7 @@ if "%1" == "all" (
     )
 )
 
-call deactivate
+call Vendor\Binaries\venv\Scripts\deactivate.bat
 
 
 popd
