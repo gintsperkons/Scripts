@@ -34,4 +34,4 @@ if __name__ ==  "__main__":
                         "build.bat","build.sh","clean.bat","clean.sh"]
 
     clean(fileEndings,
-            fileEndings)
+            folderNames)
