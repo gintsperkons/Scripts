@@ -7,22 +7,6 @@
             "./Scripts/Linux/Clean.sh %1\n"
         ]
     },
-    "build": {
-        "nt": [
-            "./Scripts/Windows/Build.bat %1\n"
-        ],
-        "posix": [
-            "./Scripts/Linux/Build.sh %1\n"
-        ]
-    },
-    "run": {
-        "nt": [
-            "./Scripts/Windows/Run.bat %1\n"
-        ],
-        "posix": [
-            "./Scripts/Linux/Run.sh %1\n"
-        ]
-    },
     "premake":{
         "nt": [
             "call \"Vendor/Binaries/Premake/premake5.exe\" %1\n"
