@@ -29,8 +29,12 @@ def SetupPremake():
     
 def ConfiguringPremake(env = Defines.defaultEnvironment[os.name]):
     print("Configuring premake")
-    print(f"call \"{os.getcwd()}/{Defines.premakePath}\" {env}")
-    os.system(f"call \"{os.getcwd()}/{Defines.premakePath}\" {env}")
+    if os.name == "nt":
+        print(f"call \"{os.getcwd()}\\{Defines.premakePath}\" {env}")
+        os.system(f"call \"{os.getcwd()}\\{Defines.premakePath}\" {env}")
+    if os.name == "posix":
+        print(f"./{Defines.premakePath} {env}")
+        os.system(f"./{Defines.premakePath} {env}")
 
 
 

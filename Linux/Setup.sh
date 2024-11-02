@@ -4,8 +4,6 @@ binaryDir="Vendor/Binaries"
 tempDir="$binaryDir/Temp"
 pythonVersion=3.13.0
 pythonVersionSmall=313
-pythonURL="https://www.python.org/ftp/python/3.13.0/python-3.13.0-embed-amd64.zip"
-getpipLink="https://bootstrap.pypa.io/get-pip.py"
 
 echo "Setting up Project..."
 pushd "$(dirname "$0")/../../"
@@ -18,33 +16,23 @@ checkDir() {
 
 setupVirtualEnv() {
     echo "Creating virtual environment..."
-    python -m virtualenv Vendor/Binaries/venv
+    python -m venv Vendor/Binaries/venv
 
     echo "Activating virtual environment..."
     source Vendor/Binaries/venv/bin/activate
     pip install -r Scripts/Python/requirements.txt
 }
 
-gettingPython() {
-    echo "Downloading Python..."
-    curl -o "$tempDir/python.zip" "$pythonURL"
 
-    echo "Extracting Python..."
-    unzip "$tempDir/python.zip" -d "$binaryDir/Python"
-
-    echo "Downloading get-pip.py"
-    curl -o "$tempDir/get-pip.py" "$getpipLink"
-
-    echo "Installing pip"
-    "$binaryDir/Python/python.exe" "$tempDir/get-pip.py"
-}
 
 checkDir "$tempDir"
 
 output="$(python -c "print(1+1)")"
-if [[ output -eq 2 ]]; then
-    gettingPython
-    echo "Lib/site-packages" >> "$binaryDir/Python/python$pythonVersionSmall._pth"
+if [[ $output -eq 2 ]]; then
+    echo "Python is working correctly."
+else
+    echo "Python is not working correctly."
+    exit 1
 fi
 
 if [ ! -f "$binaryDir/venv/bin/activate" ]; then
