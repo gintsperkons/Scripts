@@ -37,6 +37,20 @@ def ConfiguringPremake(env = Defines.defaultEnvironment[os.name]):
         os.system(f"./{Defines.premakePath} {env}")
 
 
+def callExtended():
+    import os
+    import subprocess
+
+    # Define the path to the setup.py file
+    setup_path = os.path.join(os.path.dirname(__file__), '../../Setup.py')
+
+    # Check if the file exists
+    if os.path.exists(setup_path):
+        # Call setup.py using subprocess
+        subprocess.run(['python', setup_path], check=True)
+    else:
+        print("setup.py not found at", setup_path)
+
 
 if __name__=="__main__":
     templates = {}
@@ -51,4 +65,5 @@ if __name__=="__main__":
         ConfiguringPremake(env)
     else:
         ConfiguringPremake()
+    callExtended()
     
