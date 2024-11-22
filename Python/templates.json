@@ -11,7 +11,7 @@
         "nt": [
             "@echo off\n",
             "set arg=%1\n",
-            "if \"%arg%\"==\"\" set arg=gmake2\n",
+            "if \"%arg%\"==\"\" set arg=vs2022\n",
             "Vendor\\Binaries\\Premake\\premake5.exe %arg%\n"
         ],
         "posix": [
