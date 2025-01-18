@@ -17,8 +17,8 @@ defaultEnvironment = {
     "posix":"gmake2"
 }
 premakeURL = {
-    "nt":"https://github.com/premake/premake-core/releases/download/v5.0.0-beta2/premake-5.0.0-beta2-windows.zip",
-    "posix":"https://github.com/premake/premake-core/releases/download/v5.0.0-beta2/premake-5.0.0-beta2-linux.tar.gz"
+    "nt":"https://github.com/premake/premake-core/releases/download/v5.0.0-beta4/premake-5.0.0-beta4-windows.zip",
+    "posix":"https://github.com/premake/premake-core/releases/download/v5.0.0-beta4/premake-5.0.0-beta4-linux.tar.gz"
 }
 premakeArchive = {
     "nt":f"{tempDir}premake.zip",

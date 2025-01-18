@@ -25,6 +25,7 @@ def SetupPremake():
     if not os.path.exists(Defines.premakeDir):
         Utils.downloadFile(Defines.premakeURL[os.name],Defines.premakeArchive[os.name])
         Utils.extract(Defines.premakeArchive[os.name],Defines.premakeDir)
+        os.chmod(Defines.premakePath, stat.S_IRUSR | stat.S_IWUSR | stat.S_IXUSR | stat.S_IRGRP | stat.S_IROTH)
         
     
 def ConfiguringPremake(env = Defines.defaultEnvironment[os.name]):
