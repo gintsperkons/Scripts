@@ -8,6 +8,8 @@ def checkFolder(outFile):
     if not os.path.exists(outFile):
         os.makedirs(outFile)
 
+def fileExists(file):
+    return os.path.exists(file)
 
 def formatAmount(amount):
     if amount < 1024:
@@ -42,7 +44,11 @@ def downloadFile(url,outputFile):
                 sys.stdout.write("\r[%s%s] %s/%s %s" % ('=' * done, ' ' * (50-done),formatAmount(dl),formatAmount(total_length),' '*5) )    
                 sys.stdout.flush()
             print("")
-            
+
+def copyFile(source,destination):
+    if os.path.isfile(source):
+        shutil.copy2(source, destination)
+
 def extractTar(archivePath,outPath):
     import tarfile        
     checkFolder(outPath)
