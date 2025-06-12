@@ -1,9 +1,9 @@
 
 
-# Source the necessary scripts
-. .\Scripts\Window\utils.ps1
-. .\Scripts\Window\load_env.ps1
-. .\Scripts\Window\setup_python.ps1
+# Source the necessary Flux
+. .\Flux\Window\utils.ps1
+. .\Flux\Window\load_env.ps1
+. .\Flux\Window\setup_python.ps1
 
 
 # Change to the root directory of the project
@@ -23,7 +23,7 @@ Load-Env
 Check-Python
 
 # Run the setup Python script
-python3 .\Scripts\Python\flux.py @Args
+python3 .\Flux\Python\flux.py @Args
 
 $tempExists = Check-FileExists $env_vars['TEMP_DIR']
 if ($tempExists -eq 1) {

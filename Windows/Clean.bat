@@ -7,14 +7,14 @@ echo Cleaning Project...
 pushd "%~dp0../../"
 
 
-if not exist "!binaryDir!\venv\Scripts\activate.bat" (
+if not exist "!binaryDir!\venv\Flux\activate.bat" (
     echo Virtual environment not found. Exiting...
     goto :eof
 )
 echo Activating virtual environment...
-call Vendor\Binaries\venv\Scripts\activate.bat
+call Vendor\Binaries\venv\Flux\activate.bat
 
-python Scripts/Python/Clean.py %1
+python Flux/Python/Clean.py %1
 
 if "%1" == "all" (
     if exist !binaryDir! (
@@ -23,7 +23,7 @@ if "%1" == "all" (
     )
 )
 
-call Vendor\Binaries\venv\Scripts\deactivate.bat
+call Vendor\Binaries\venv\Flux\deactivate.bat
 
 
 popd

@@ -13,7 +13,7 @@ def load_env_file(path):
     return env
 
 def load_env():
-    default_env_path = os.path.join("Scripts", ".env_default")
+    default_env_path = os.path.join("Flux", ".env_default")
     default_env = load_env_file(default_env_path)
 
     if os.path.exists(".env"):

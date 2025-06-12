@@ -19,7 +19,7 @@ load_env_file() {
 
 # Load defaults and overrides
 load_env() {
-  load_env_file "Scripts/.env_default"
+  load_env_file "Flux/.env_default"
 
   if [ -f ".env" ]; then
     load_env_file ".env"

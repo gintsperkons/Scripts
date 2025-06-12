@@ -11,6 +11,9 @@ def checkFolder(outFile):
 def fileExists(file):
     return os.path.exists(file)
 
+def dirExists(dir):
+    return os.path.isdir(dir)
+
 def formatAmount(amount):
     if amount < 1024:
         return str(round(amount,2)) + " B"
@@ -50,16 +53,20 @@ def copyFile(source,destination):
         shutil.copy2(source, destination)
 
 def extractTar(archivePath,outPath):
+    print(f"Extracting {archivePath} to {outPath}")
     import tarfile        
     checkFolder(outPath)
     with tarfile.open(archivePath, 'r') as tar_ref:
         tar_ref.extractall(outPath)
+    print(f"Extracted {archivePath} to {outPath}")
 
 def extractZip(archivePath,outPath):
+    print(f"Extracting {archivePath} to {outPath}")
     import zipfile
     checkFolder(outPath)
     with zipfile.ZipFile(archivePath, 'r') as zip_ref:
-        zip_ref.extractall(outPath)  
+        zip_ref.extractall(outPath) 
+    print(f"Extracted {archivePath} to {outPath}")
             
 def extract(archivePath,outPath):
     if os.name == "posix":
@@ -86,3 +93,15 @@ def findFolder(searchDir,key):
    for dir in os.listdir(searchDir):
        if re.match(key,dir):
            return dir
+
+
+def get_os_name():
+    system = sys.platform.system().lower()
+    if system == "windows":
+        return "windows"
+    elif system == "linux":
+        return "linux"
+    elif system == "darwin":
+        return "macosx"
+    else:
+        return "unknown"

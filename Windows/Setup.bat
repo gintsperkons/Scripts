@@ -18,22 +18,22 @@ if not exist "!binaryDir!\Python\python.exe" (
     echo Lib\site-packages>>"!binaryDir!\Python\python!pythonVersionSmall!._pth"
 )
 
-if not exist "!binaryDir!\venv\Scripts\activate.bat" (
+if not exist "!binaryDir!\venv\Flux\activate.bat" (
     call :setupVirtualEnv
 ) else (
     echo Activating virtual environment...
-    call Vendor\Binaries\venv\Scripts\activate.bat
+    call Vendor\Binaries\venv\Flux\activate.bat
 )
 
 
-python Scripts/Python/Setup.py %1
+python Flux/Python/Setup.py %1
 
 if exist !tempDir! (
     rmdir /s /q !tempDir!
 )
 
 echo Setup complete.
-call Vendor\Binaries\venv\Scripts\deactivate.bat
+call Vendor\Binaries\venv\Flux\deactivate.bat
 popd
 goto :eof
 
@@ -55,8 +55,8 @@ exit /b 0
     Vendor\Binaries\Python\python.exe -m virtualenv Vendor/Binaries/venv
 
     echo Activating virtual environment...
-    call Vendor\Binaries\venv\Scripts\activate.bat
-    pip install -r Scripts/Python/requirements.txt
+    call Vendor\Binaries\venv\Flux\activate.bat
+    pip install -r Flux/Python/requirements.txt
     exit /b 0
 
 :gettingPython

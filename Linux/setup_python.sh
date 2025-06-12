@@ -1,6 +1,6 @@
 #!bin/bash
 
-source Scripts/Linux/vars.sh
+source Flux/Linux/vars.sh
 
 check_python() {  
   output="$(python3 -c "print(1+1)")"

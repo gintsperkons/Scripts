@@ -18,14 +18,21 @@ def handle_commands(parsed_args):
   import premake
   import setup
   import make
+  import build
+  import run
+  import clean
   commandHandles = {
-      "run": defaultHandle,
+      "run": run.handleRun,
       "premake":premake.handlePremake,
-      "build":defaultHandle,
-      "clean":defaultHandle,
+      "build":build.handleBuild,
       "setup":setup.handleSetup,
-      "custom":defaultHandle,
-      "make:env":make.handleMake
+      "make:env":make.handleMake,
+      "make:custom":make.handleMake,
+      "clean": clean.handleClean,
+      "clean:all": clean.handleClean,
+      "clean:gen": clean.handleClean,
+      "clean:build": clean.handleClean,
+      "exec":cs.handle_custom,
   }
 
   if parsed_args.command in commandHandles:

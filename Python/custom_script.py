@@ -11,7 +11,6 @@ def import_custom(file_path):
           spec.loader.exec_module(module)
           return module
       else:
-          print(f"⚠️ File '{path}' does not exist.")
           return None
 
   # Try to import setup.py
@@ -26,8 +25,26 @@ def import_custom(file_path):
       setattr(custom_setup_module, key, value)
   return custom_setup_module
 
+def handle_custom():
+   function = globals.parsed_args.function
+   if function:
+       execute_custom(function)
+   else:
+       print("Please specify a function name to execute.")
+
 def execute_custom(function_name):
-   pass
+    custom_script = globals.custom_script
+    if hasattr(custom_script, function_name):
+        getattr(custom_script, function_name)()
+    else:
+        print(f"⚠️ Function '{function_name}' not found in custom script.")
+
+
+
+def execute_custom_internal(function_name):
+    custom_script = globals.custom_script
+    if hasattr(custom_script, function_name):
+        getattr(custom_script, function_name)()
 
 
 # def execute_custom(custom_script,gobj):

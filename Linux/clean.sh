@@ -20,7 +20,7 @@ fi
 echo "Activating virtual environment..."
 source "$binaryDir/venv/bin/activate"
 
-python Scripts/Python/Clean.py "$1"
+python Flux/Python/Clean.py "$1"
 
 if [ "$1" == "all" ]; then
     echo "Cleaning $binaryDir"

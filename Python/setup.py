@@ -3,4 +3,7 @@ import premake
 
 def handleSetup():
     if not premake.premakeExists():
-        print("init premake code")
+        premake.getPremake()
+    else:
+        print("Premake already exists.")
+        
