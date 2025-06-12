@@ -19,21 +19,21 @@ def removeBuildDir():
 def removeGeneratedFiles():
     import utils
     import os
-    dirs = ["__pycache__"]
-    files = ["Makefile"]
-    file_extensions = [".pyc", ".pyo"]
+    dirs_to_delete = ["__pycache__"]
+    files_to_delete = ["Makefile"]
+    file_extensions_to_delete = [".pyc", ".pyo"]
     #Remove from project folder
     for root, dirs, files in os.walk(os.getcwd()):
     # Remove target directories
-        for dir_name in dirs:
-            if dir_name in dirs:
-                dir_path = os.path.join(root, dir_name)
-                shutil.rmtree(dir_path, ignore_errors=True)
+        for dir_name in dirs_to_delete:
+            dir_path = os.path.join(root, dir_name)
+            if utils.dirExists(dir_path):
+                shutil.rmtree(dir_path)
                 print(f"Removed directory: {dir_path}")
 
         # Remove target files
         for file_name in files:
-            if file_name in files or any(file_name.endswith(ext) for ext in file_extensions):
+            if file_name in files_to_delete or any(file_name.endswith(ext) for ext in file_extensions_to_delete):
                 file_path = os.path.join(root, file_name)
                 os.remove(file_path)
                 print(f"Removed file: {file_path}")
