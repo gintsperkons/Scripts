@@ -1,6 +1,8 @@
 import globals as g
 import platform
 import custom_script as cs
+import shutil
+import subprocess
 
 def handleBuild():
     cs.execute_custom_internal("beforeBuild")
@@ -15,8 +17,19 @@ def handleBuild():
     cs.execute_custom_internal("afterBuild")
 
 
+
+def run_make_with_bear():
+    # Check if bear is installed
+    if shutil.which("bear"):
+        print("🐻 Bear is installed, using: bear -- make")
+        subprocess.run(["bear", "--", "make"], check=True)
+    else:
+        print("🔧 Bear not found, using plain make")
+        subprocess.run(["make"], check=True)
+
+
 def buildLinux():
     import subprocess
     import utils
-
-    subprocess.run(["make"], check=True)
+    run_make_with_bear()
+    # subprocess.run(["make"], check=True)
