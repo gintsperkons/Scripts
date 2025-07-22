@@ -18,8 +18,15 @@ def handlePremake():
     args = g.parsed_args.premake_args  # This is already a list
 
     cmd = [binary] + args
-
-    subprocess.run(cmd, check=True)
+    try:
+        import os 
+        if not os.path.exists('Vendor/Binaries/premake/premake5'):
+            subprocess.run(["python3","Flux/Python/flux.py","setup"])
+        if not (("gmake" in args)  or ("vs2022" in args)):
+            cmd += [getDefaultPremakeAction()]
+        subprocess.run(cmd, check=True)
+    except Exception as e:
+        print(e) 
 
 
 
@@ -30,6 +37,15 @@ def premakeExists() -> bool:
     if utils.fileExists(f"{g.envs["BINARY_DIR"]}/premake/{premakeFileName}"):
         return True
     return False
+
+def getDefaultPremakeAction():
+    return (
+    "vs2022" if platform.system().lower() == "windows" else
+    "gmake" if platform.system().lower() == "linux" else
+    "gmake" if platform.system().lower() == "darwin" else
+    "gmake"
+    )
+
 
 def getPremake():
     osName = (

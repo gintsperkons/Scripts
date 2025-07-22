@@ -19,17 +19,18 @@ def handleBuild():
 
 
 def run_make_with_bear():
-    # Check if bear is installed
-    if shutil.which("bear"):
-        print("🐻 Bear is installed, using: bear -- make")
-        subprocess.run(["bear", "--", "make"], check=True)
-    else:
-        print("🔧 Bear not found, using plain make")
-        subprocess.run(["make"], check=True)
-
+    
+    try:
+        import os
+        if not os.path.exists("Makefile"):
+            subprocess.run(["python3", "Flux/Python/flux.py", "premake"], check=True)
+        # Check if bear is installed
+        if shutil.which("bear"):
+            subprocess.run(["bear", "--", "make"], check=True)
+        else:
+            subprocess.run(["make"], check=True)
+    except subprocess.CalledProcessError as e:
+        print(e)
 
 def buildLinux():
-    import subprocess
-    import utils
     run_make_with_bear()
-    # subprocess.run(["make"], check=True)
