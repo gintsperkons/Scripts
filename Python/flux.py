@@ -7,36 +7,35 @@ import globals
 import parse_args
 
 
-
-
-
 def defaultHandle():
-  print("handle Defaults")
+    print("handle Defaults")
 
 
-def handle_commands(parsed_args):  
-  import premake
-  import setup
-  import make
-  import build
-  import run
-  import clean
-  commandHandles = {
-      "run": run.handleRun,
-      "premake":premake.handlePremake,
-      "build":build.handleBuild,
-      "setup":setup.handleSetup,
-      "make:env":make.handleMake,
-      "make:custom":make.handleMake,
-      "clean": clean.handleClean,
-      "clean:all": clean.handleClean,
-      "clean:gen": clean.handleClean,
-      "clean:build": clean.handleClean,
-      "exec":cs.handle_custom,
-  }
+def handle_commands(parsed_args):
+    import premake
+    import setup
+    import make
+    import build
+    import run
+    import clean
 
-  if parsed_args.command in commandHandles:
-    commandHandles[parsed_args.command]()
+    commandHandles = {
+        "run": run.handleRun,
+        "run:build": run.handleRun,
+        "premake": premake.handlePremake,
+        "build": build.handleBuild,
+        "setup": setup.handleSetup,
+        "make:env": make.handleMake,
+        "make:custom": make.handleMake,
+        "clean": clean.handleClean,
+        "clean:all": clean.handleClean,
+        "clean:gen": clean.handleClean,
+        "clean:build": clean.handleClean,
+        "exec": cs.handle_custom,
+    }
+
+    if parsed_args.command in commandHandles:
+        commandHandles[parsed_args.command]()
 
 
 globals.args = sys.argv[1:]
@@ -49,9 +48,6 @@ globals.custom_script = cs.import_custom("flux.py")
 handle_commands(globals.parsed_args)
 
 
+if utils.fileExists(globals.envs["TEMP_DIR"]):
+    shutil.rmtree(globals.envs["TEMP_DIR"])
 
-
-
-
-if utils.fileExists(globals.envs['TEMP_DIR']):
-  shutil.rmtree(globals.envs['TEMP_DIR'])

@@ -19,16 +19,13 @@ def handleBuild():
 
 
 def run_make_with_bear():
-    
+
     try:
         import os
         if not os.path.exists("Makefile"):
             subprocess.run(["python3", "Flux/Python/flux.py", "premake"], check=True)
         # Check if bear is installed
-        if shutil.which("bear"):
-            subprocess.run(["bear", "--", "make"], check=True)
-        else:
-            subprocess.run(["make"], check=True)
+        subprocess.run(["make"], check=True)
     except subprocess.CalledProcessError as e:
         print(e)
 
