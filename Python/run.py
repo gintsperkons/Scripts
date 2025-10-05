@@ -1,14 +1,16 @@
 import globals as g
 
 
+binPath = "Binaries/runtime-debug/" + g.envs["PROJECT_NAME"]
+
 def run():
     import subprocess
     import os
 
     try:
-        if not os.path.exists("Binaries/runtime-debug/MaterialDesignProgram"):
+        if not os.path.exists(binPath):
             subprocess.run(["python3", "Flux/Python/flux.py", "build"], check=True)
-        subprocess.run(["Binaries/runtime-debug/MaterialDesignProgram"], check=True)
+        subprocess.run([binPath], check=True)
     except KeyboardInterrupt:
         pass
     except Exception as e:
@@ -20,7 +22,7 @@ def runRebuild():
    
     try:
         subprocess.run(["python3", "Flux/Python/flux.py", "build"], check=True)
-        subprocess.run(["Binaries/runtime-debug/MaterialDesignProgram"], check=True)
+        subprocess.run([binPath], check=True)
     except KeyboardInterrupt:
         pass
     except Exception as e:
