@@ -2,11 +2,11 @@ import globals as g
 import utils
 
 def handleEnvMake():
-    if utils.fileExists("Flux/.env_default"):
+    if utils.fileExists("Flux/defaults/.env_default"):
         if utils.fileExists(".env"):
             print("Env file already exists")
             return
-        utils.copyFile("Flux/.env_default",".env")
+        utils.copyFile("Flux/defaults/.env_default",".env")
         print("Copied Default env data")
 
 def handleCustomMake():

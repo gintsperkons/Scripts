@@ -36,6 +36,8 @@ def parse():
     setup_parser = subparsers.add_parser("setup", help="setup project enviroment")
 
     make_env_parser = subparsers.add_parser("make:env", help="initialize .env file")
+    
+    init_parser = subparsers.add_parser("init", help="initialize a new flux project")
 
     return parser.parse_args()
 
