@@ -1,8 +1,13 @@
-import globals as g
+import os
 import platform
-import custom_script as cs
 import shutil
 import subprocess
+
+import custom_script as cs
+import globals as g
+
+num_cores = os.cpu_count()
+
 
 def handleBuild():
     cs.execute_custom_internal("beforeBuild")
@@ -17,17 +22,17 @@ def handleBuild():
     cs.execute_custom_internal("afterBuild")
 
 
-
 def run_make_with_bear():
-
     try:
         import os
+
         if not os.path.exists("Makefile"):
             subprocess.run(["python3", "Flux/Python/flux.py", "premake"], check=True)
         # Check if bear is installed
-        subprocess.run(["make"], check=True)
+        subprocess.run(["make", f"-j{num_cores}"], check=True)
     except subprocess.CalledProcessError as e:
         print(e)
+
 
 def buildLinux():
     run_make_with_bear()
