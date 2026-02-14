@@ -1,4 +1,5 @@
 import platform
+import re
 import subprocess
 
 import globals as g
@@ -32,6 +33,21 @@ def handlePremake():
             subprocess.run(premake_cmd, check=True)
             export_cmd = cmd + ["ecc"]
             subprocess.run(export_cmd, check=True)
+            
+            
+            # --- Post-process compile_commands.json to fix trailing commas ---
+            compile_commands_path = os.path.join(os.getcwd(), "compile_commands.json")
+            if os.path.exists(compile_commands_path):
+                with open(compile_commands_path, "r") as f:
+                    content = f.read()
+
+                # Remove trailing commas before closing array brackets
+                content = re.sub(r",\s*(\])", r"\1", content, flags=re.MULTILINE)
+
+                with open(compile_commands_path, "w") as f:
+                    f.write(content)
+                print("✅ Fixed trailing commas in compile_commands.json")
+
     except Exception as e:
         print(e)
 
