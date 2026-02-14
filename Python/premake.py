@@ -30,7 +30,7 @@ def handlePremake():
         if not (("gmake" in args) or ("vs2022" in args)):
             premake_cmd = cmd + [getDefaultPremakeAction()]
             subprocess.run(premake_cmd, check=True)
-            export_cmd = cmd + ["compiledb"]
+            export_cmd = cmd + ["ecc"]
             subprocess.run(export_cmd, check=True)
     except Exception as e:
         print(e)
@@ -90,7 +90,7 @@ def getPremake():
     plugin_dir = f"{g.envs['BINARY_DIR']}/premake/export-compile-commands"
     if not os.path.exists(plugin_dir):
         utils.downloadFile(
-            "https://github.com/akash1474/premake-export-compile-commands/archive/refs/heads/master.zip",
+            "https://github.com/MattBystrin/premake-ecc/archive/refs/heads/master.zip",
             f"{g.envs['TEMP_DIR']}/premake-export-compile-commands.zip",
         )
         plugin_tmp = f"{g.envs['BINARY_DIR']}/premake/export-compile-commands-tmp"
@@ -101,7 +101,7 @@ def getPremake():
 
         # The ZIP always contains premake-export-compile-commands-master/
         extracted_folder = os.path.join(
-            plugin_tmp, "premake-export-compile-commands-master"
+            plugin_tmp, "premake-ecc-master"
         )
         if os.path.exists(plugin_dir):
             shutil.rmtree(plugin_dir)
